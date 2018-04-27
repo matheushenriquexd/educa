@@ -26,6 +26,11 @@
 		      <li class="nav-item">
 		        <a class="nav-link" href="#">Fale Conosco</a>
 		      </li>
+		       <ul class="nav navbar-nav ml-auto">
+			       <li class="nav-item">
+			        <a class="nav-link" href="principal.php?sair=true">Sair</a>
+			      </li>
+			    </ul>
 		    </ul>
 		  </div>
 	</nav>

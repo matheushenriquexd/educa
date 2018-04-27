@@ -24,17 +24,28 @@
 		}
 	}
 
+	function deslogar(){
+
+	}
+
 	function verificar_usuario_logado(){
-		if(($_SESSION['cpf'] == true) && ($_SESSION['senha'] == true)){
+		session_start();
+		if((isset($_SESSION['cpf'])) && (isset($_SESSION['senha']))){
 			if(verificar_login($_SESSION['cpf'],$_SESSION['senha'])){
 				echo("Verificado e confirmado");
+				 header('location:principal.php');
 			}else{
 				 header('location:index.php');
 			}
-		}else{
-			echo ("SAO INVALIDO");
 		}
 				
+	}
+
+
+	function listaraturma(){
+		global $turmas;
+		$turmas = lista_turma($_SESSION['cpf']);
+		
 	}
 
 

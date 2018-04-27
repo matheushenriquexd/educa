@@ -21,6 +21,10 @@
 		$res = $mysqli->query($sql);
         $count = $res->num_rows;
 		if($count != 0){
+			while ($row = $res->fetch_assoc()) {
+				   session_start();
+		           $_SESSION['nome'] = $row["nome"];
+		    }
 			return true;
 	     }else{
 	     	return false;
@@ -28,13 +32,30 @@
 	}
 
 
+	function lista_turma($cpf = null){
+		$mysqli = new mysqli("localhost", "root","","dbeduca");
+		$sql = "select * from professores,turma where professores.cpf = '".$cpf."' and professores.cpf = turma.professor ";
+		$res = $mysqli->query($sql);
+		if($res->num_rows != 0){
+			
+			return $res;
+			
+		}else{
+			return null;
+		}
+	}
+
+
 
 	function validar_login($cpf = null, $senha = null){
+
 		try{
 			
 			if(verificar_login($cpf,md5($senha))){
+				session_start();
 				$_SESSION['cpf'] = $cpf;
 				$_SESSION['senha'] = md5($senha);
+
 
 			}
 			else{
