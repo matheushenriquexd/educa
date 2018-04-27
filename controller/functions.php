@@ -24,8 +24,10 @@
 		}
 	}
 
-	function deslogar(){
-
+	function criar_nova_turma(){
+		if (!empty($_POST['ano']) && !empty($_POST['descricao'])) {
+			  criarturma($_SESSION['cpf'],$_POST['ano'],$_POST['descricao']);
+		}
 	}
 
 	function verificar_usuario_logado(){
@@ -46,6 +48,13 @@
 		global $turmas;
 		$turmas = lista_turma($_SESSION['cpf']);
 		
+	}
+
+
+	function excluirturma(){
+		if (!empty($_GET['excluirid'])) {
+			exluirturmabd($_GET['excluirid']);
+		}
 	}
 
 

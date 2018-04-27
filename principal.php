@@ -12,6 +12,7 @@
   }
 
   listaraturma();
+  excluirturma();
 
 
 
@@ -19,13 +20,29 @@
 ?>
 <?php include(HEADER); ?>
 <div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="jumbotron jumbotron">
+				<div class="container">
+					<p class="lead">Seja-bem vindo ao sistema <?php $_SESSION['nome'] ?></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-1">
+			<h1>Turmas</h1>
+		</div>
+		<div class="col-md-1 offset-md-9">
+			<a type="button" href="criarnovaturma.php" class="btn btn-success">Criar Nova Turma</a>
+	    </div>
+	</div>
 		<div class="row">
 			<div class="col-md-12">
-				<div class="jumbotron jumbotron">
-				  <div class="container">
-				    <p class="lead">Seja-bem vindo ao sistema <?php $_SESSION['nome'] ?></p>
-				  </div>
-				</div>
+				
+		
+
 			<table class="table table-bordered">
 			  <thead>
 			    <tr>
@@ -33,6 +50,7 @@
 			      <th scope="col">Descricao</th>
 			      <th scope="col">Ano</th>
 			      <th scope="col">Professor</th>
+			      <th scope="col">Açao</th>
 			    </tr>
 			  </thead>
 			  <tbody>
@@ -42,7 +60,8 @@
 				      <td><?php echo $row['descricao']; ?></td>
 				      <td><?php echo $row['ano']; ?></td>
 				      <td><?php echo $row['nome']; ?></td>
-				 
+				 	  <td><button type="button" class="btn btn-primary">Editar</button> <a type="button" href="principal.php?excluirid=<?php echo $row['id']; ?>" class="btn btn-danger">Excluir</a></td>
+				 	  
 				     
 				    </tr>
 

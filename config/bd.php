@@ -46,6 +46,29 @@
 	}
 
 
+	function criarturma($cpf = null, $ano = null, $descricao = null){
+		$mysqli = new mysqli("localhost", "root","","dbeduca");
+		$sql = "insert into turma(ano,descricao,id,professor) values ($ano,'$descricao',654, '$cpf')";
+		$res = $mysqli->query($sql);
+		if($res){	
+			header('location: principal.php');
+			
+		}else{
+			echo("n deu certto");
+		}
+	}
+
+
+
+	function exluirturmabd($id = null){
+		$mysqli = new mysqli("localhost", "root","","dbeduca");
+		$sql = "delete from turma where id = $id";
+		$res = $mysqli->query($sql);
+		if($res){	
+			header('location: principal.php');
+		}
+	}
+
 
 	function validar_login($cpf = null, $senha = null){
 
