@@ -3,6 +3,8 @@
 	require_once 'controller/functions.php'; 
 
 	verificar_cadastro();
+
+	verificar_usuario_logado();
 ?>
 <?php include(HEADER); ?>
 	<div class="container">

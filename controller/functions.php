@@ -20,8 +20,21 @@
 
 	function verificar_cadastro(){
 		if (!empty($_POST['cpf']) && !empty($_POST['senha'])) {
-			verificar_login($_POST['cpf'], $_POST['senha']);
+			validar_login($_POST['cpf'], $_POST['senha']);
 		}
+	}
+
+	function verificar_usuario_logado(){
+		if(($_SESSION['cpf'] == true) && ($_SESSION['senha'] == true)){
+			if(verificar_login($_SESSION['cpf'],$_SESSION['senha'])){
+				echo("Verificado e confirmado");
+			}else{
+				 header('location:index.php');
+			}
+		}else{
+			echo ("SAO INVALIDO");
+		}
+				
 	}
 
 

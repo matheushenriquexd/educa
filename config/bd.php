@@ -17,14 +17,27 @@
 
 	function verificar_login($cpf = null, $senha = null){
 		$mysqli = new mysqli("localhost", "root","","dbeduca");
+		$sql = "SELECT * from  professores where cpf = '$cpf' and senha = '".$senha."'";
+		$res = $mysqli->query($sql);
+        $count = $res->num_rows;
+		if($count != 0){
+			return true;
+	     }else{
+	     	return false;
+	     }
+	}
+
+
+
+	function validar_login($cpf = null, $senha = null){
 		try{
-			$sql = "SELECT * from  professores where cpf = '$cpf'";
-			$res = $mysqli->query($sql);
-			$count = $res->num_rows;
 			
-			if($count != 0){
-				echo("dfasdas");
-			}else{
+			if(verificar_login($cpf,md5($senha))){
+				$_SESSION['cpf'] = $cpf;
+				$_SESSION['senha'] = md5($senha);
+
+			}
+			else{
 				echo("nao deu certo");
 			}
 
@@ -35,5 +48,8 @@
 		} 
 	}
 
+
+
+	
 
 ?>
