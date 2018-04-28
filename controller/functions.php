@@ -1,7 +1,7 @@
 <?php 
 	require_once CONFIG; 
 	require_once DATABASE; 
-	function cadastrar_professor(){
+	function cadastrar_professor_aluno(){
 		if (!empty($_POST['dados'])) {
 			$dados = "";
 			$i = 0;
@@ -13,7 +13,12 @@
 				$i++;
 			}
 			$dados = rtrim($dados, ',');
-			salvar_professor($dados);
+			if(!empty($_POST['aluno'])){
+				salvar_professor_aluno($dados, "alunos");
+			}else{
+				salvar_professor_aluno($dados, "professor");
+			}
+			
 		}
 	}
 
@@ -26,7 +31,7 @@
 
 	function criar_nova_turma(){
 		if (!empty($_POST['ano']) && !empty($_POST['descricao'])) {
-			  criarturma($_SESSION['cpf'],$_POST['ano'],$_POST['descricao']);
+			  criarturma($_SESSION['cpf'],$_POST['ano'],$_POST['descricao']);http://localhost/cadastro.php
 		}
 	}
 
@@ -50,10 +55,30 @@
 		
 	}
 
+	function lista_aluno_turma(){
+		if (!empty($_GET['idturma'])) {
+			aluno_turma($_GET['idturma']);
+		}
+	}
+
 
 	function excluirturma(){
 		if (!empty($_GET['excluirid'])) {
 			exluirturmabd($_GET['excluirid']);
+		}
+	}
+
+
+	function lista_alunos(){
+		lista_de_alunos();
+	}
+
+
+	function adicionar_aluno_turma(){
+		if (!empty($_GET['idturma']) && !empty($_GET['cpf'])) {
+			global $id_turma;
+			$id_turma = $_GET['idturma'];
+			adicionar_aluno_na_turma($_GET['idturma'],$_GET['cpf']);
 		}
 	}
 

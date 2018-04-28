@@ -3,7 +3,7 @@
 	require_once 'config/config.php'; 
 	require_once FUNCTIONS; 
 	
-	cadastrar_professor();
+	cadastrar_professor_aluno();
 
 ?>
 <?php include(HEADER); ?>
@@ -30,13 +30,13 @@
 						      <legend class="col-form-label col-sm-2 pt-0">Selecione:</legend>
 						      <div class="col-sm-10">
 						        <div class="form-check">
-						          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+						          <input class="form-check-input" name="aluno" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
 						          <label class="form-check-label" for="gridRadios1">
 						            Aluno
 						          </label>
 						        </div>
 						        <div class="form-check">
-						          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+						          <input class="form-check-input" name="professor" type="radio" name="gridRadios" id="gridRadios2" value="option2">
 						          <label class="form-check-label" for="gridRadios2">
 						            Professor
 						          </label>

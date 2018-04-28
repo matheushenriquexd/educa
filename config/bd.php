@@ -1,9 +1,9 @@
 <?php 
 
-	function salvar_professor($dados = null){
+	function salvar_professor_aluno($dados = null, $table = null){
 		$mysqli = new mysqli("localhost", "root","","dbeduca");
 		try{
-			$sql = "INSERT into professores (nome,cpf,senha) values "."($dados)";
+			$sql = "INSERT into $table (nome,cpf,senha) values "."($dados)";
 			$res = $mysqli->query($sql);
 			header('location: index.php');
 
@@ -12,6 +12,23 @@
 		 
 		} 
 		
+	}
+
+
+	function aluno_turma($idturma = null){
+		$mysqli = new mysqli("localhost", "root","","dbeduca");
+		$sql = "select * from turmaxaluno where id=$idturma";
+		global $id_turma;
+		$id_turma = $idturma;
+		$res = $mysqli->query($sql);
+		if($res->num_rows != 0){
+			global $resposta;
+
+			$resposta = $res;
+			
+		}else{
+			echo("123");
+		}
 	}
 
 
@@ -90,6 +107,33 @@
 			echo("erro");
 		 
 		} 
+	}
+
+
+	function lista_de_alunos(){
+		$mysqli = new mysqli("localhost", "root","","dbeduca");
+		$sql = "SELECT cpf,nome FROM alunos";
+		$res = $mysqli->query($sql);
+		global $alunos;
+		if($res->num_rows != 0){
+			$alunos = $res;
+
+		}else{
+		}
+	}
+
+
+
+	function adicionar_aluno_na_turma($idturma = null, $cpfaluno = null){
+		$mysqli = new mysqli("localhost", "root","","dbeduca");
+		$sql = "insert into turmaxaluno(aluno,id) values ('$cpfaluno',$idturma);";
+		$res = $mysqli->query($sql);
+		if($res){	
+			header('location: gerenciarturma.php?idturma='.$idturma);
+			
+		}else{
+			echo($sql);
+		}
 	}
 
 
