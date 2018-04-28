@@ -35,6 +35,7 @@
 			  <thead>
 			    <tr>
 			      <th scope="col">Aluno</th>
+			       <th scope="col">Acao</th>
 			    </tr>
 			  </thead>
 			  <tbody>

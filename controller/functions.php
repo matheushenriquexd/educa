@@ -13,10 +13,9 @@
 				$i++;
 			}
 			$dados = rtrim($dados, ',');
-			if(!empty($_POST['aluno'])){
-				salvar_professor_aluno($dados, "alunos");
-			}else{
-				salvar_professor_aluno($dados, "professor");
+			if(!empty($_POST['cadastro'])){
+				salvar_professor_aluno($dados, $_POST['cadastro']);
+				
 			}
 			
 		}

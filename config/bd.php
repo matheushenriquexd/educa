@@ -65,7 +65,7 @@
 
 	function criarturma($cpf = null, $ano = null, $descricao = null){
 		$mysqli = new mysqli("localhost", "root","","dbeduca");
-		$sql = "insert into turma(ano,descricao,id,professor) values ($ano,'$descricao',654, '$cpf')";
+		$sql = "insert into turma(ano,descricao,id,professor) values ($ano,'$descricao',6524, '$cpf')";
 		$res = $mysqli->query($sql);
 		if($res){	
 			header('location: principal.php');

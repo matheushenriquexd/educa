@@ -60,7 +60,7 @@
 				      <td><?php echo $row['descricao']; ?></td>
 				      <td><?php echo $row['ano']; ?></td>
 				      <td><?php echo $row['nome']; ?></td>
-				 	  <td><button type="button" class="btn btn-primary">Editar</button> <a type="button" href="principal.php?excluirid=<?php echo $row['id']; ?>" class="btn btn-danger">Excluir</a></td>
+				 	  <td><a type="button" href="gerenciarturma.php?idturma=<?php echo $row['id']; ?>" class="btn btn-primary">Editar</a> <a type="button" href="principal.php?excluirid=<?php echo $row['id']; ?>" class="btn btn-danger">Excluir</a></td>
 				 	  
 				     
 				    </tr>
