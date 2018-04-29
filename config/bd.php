@@ -136,6 +136,21 @@
 		}
 	}
 
+	function lista_exercicio($idexercicio = null){
+		$mysqli = new mysqli("localhost", "root","","dbeduca");
+		$sql = "select * from alternativa,pergunta where alternativa.id_pergunta=pergunta.id";
+		$res = $mysqli->query($sql);
+		global $exercicios;
+		if($res->num_rows != 0){	
+			
+			$exercicios = $res;
+			
+		}else{
+			return null;
+		}
+	}
+
+
 
 
 	

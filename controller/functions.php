@@ -30,7 +30,7 @@
 
 	function criar_nova_turma(){
 		if (!empty($_POST['ano']) && !empty($_POST['descricao'])) {
-			  criarturma($_SESSION['cpf'],$_POST['ano'],$_POST['descricao']);http://localhost/cadastro.php
+			  criarturma($_SESSION['cpf'],$_POST['ano'],$_POST['descricao']);
 		}
 	}
 
@@ -61,6 +61,13 @@
 	}
 
 
+	function exercicio(){
+		if (!empty($_GET['idexercicio'])) {
+			lista_exercicio($_GET['idexercicio']);
+		}
+	}
+
+
 	function excluirturma(){
 		if (!empty($_GET['excluirid'])) {
 			exluirturmabd($_GET['excluirid']);
@@ -70,6 +77,10 @@
 
 	function lista_alunos(){
 		lista_de_alunos();
+	}
+
+	function lista_alternativas($id_pergunta = null){
+		return alternativas($id_pergunta)->fetch_assoc();
 	}
 
 

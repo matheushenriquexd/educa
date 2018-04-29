@@ -24,7 +24,7 @@
 		<div class="col-md-12">
 			<div class="jumbotron jumbotron">
 				<div class="container">
-					<p class="lead">Seja-bem vindo ao sistema <?php $_SESSION['nome'] ?></p>
+					<p class="lead">Seja-bem vindo ao sistema <?php echo($_SESSION['nome']) ?></p>
 				</div>
 			</div>
 		</div>
