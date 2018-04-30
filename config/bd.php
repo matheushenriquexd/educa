@@ -14,6 +14,31 @@
 		
 	}
 
+	function marcar_respostas($quant){
+		$corretas = 0;
+		$mysqli = new mysqli("localhost", "root","","dbeduca");
+		for($i = 1; $i <= $quant ; $i++){
+			$sql = "select * from alternativa where id=".$_GET['questao'.$i];
+			$res = $mysqli->query($sql);
+			if($res->num_rows != 0){
+			
+			while ($row = $res->fetch_assoc()) {
+				   if ($row['correta'] == 1){
+				   		echo($row['texto_alternativa']);
+				   		$corretas++;
+				   }
+
+		    }
+
+		}
+
+	}
+
+
+	$sql = "insert into rendimento(cpf_aluno,id_exercicio,acertos) values ('".$_SESSION['cpf']."',".$_GET['idexercicio'].",$corretas)";
+	$res = $mysqli->query($sql);
+}
+
 
 	function aluno_turma($idturma = null){
 		$mysqli = new mysqli("localhost", "root","","dbeduca");
@@ -138,7 +163,7 @@
 
 	function lista_exercicio($idexercicio = null){
 		$mysqli = new mysqli("localhost", "root","","dbeduca");
-		$sql = "select * from alternativa,pergunta where alternativa.id_pergunta=pergunta.id";
+		$sql = "select * from pergunta,alternativa where alternativa.id_pergunta=pergunta.id ";
 		$res = $mysqli->query($sql);
 		global $exercicios;
 		if($res->num_rows != 0){	

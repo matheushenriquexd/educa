@@ -1,6 +1,9 @@
 <?php 
 	require_once CONFIG; 
 	require_once DATABASE; 
+
+	global $quant_quest; 
+
 	function cadastrar_professor_aluno(){
 		if (!empty($_POST['dados'])) {
 			$dados = "";
@@ -81,6 +84,15 @@
 
 	function lista_alternativas($id_pergunta = null){
 		return alternativas($id_pergunta)->fetch_assoc();
+	}
+
+
+	function verificar_resposta(){
+
+		if (!empty($_GET['q'])) {
+				$quant = $_GET['q'] ;
+				marcar_respostas($quant);
+		}
 	}
 
 
