@@ -35,13 +35,21 @@
 			<h1>Turmas</h1>
 		</div>
 		<div class="col-md-1 offset-md-9">
-			<a type="button" href="criarnovaturma.php" class="btn btn-success">Criar Nova Turma</a>
+			<?php 
+				if($_SESSION['nome'] == 'professores'){
+					echo("<a type='button' href='criarnovaturma.php' class='btn btn-success'>Criar Nova Turma</a>");
+				}
+
+
+			 ?>
+			
 	    </div>
 	</div>
 		<div class="row">
 			<div class="col-md-12">
 				
-		
+			<?php if ($turmas && $_SESSION['classe'] == "professores") :?>
+
 
 			<table class="table table-bordered">
 			  <thead>
@@ -68,6 +76,36 @@
 			    <?php endwhile; ?>
 			  </tbody>
 			</table>
+		<?php endif; ?>
+		<?php if ($turmas && $_SESSION['classe'] == "alunos") :?>
+				<table class="table table-bordered">
+			  <thead>
+			    <tr>
+			      <th scope="col">#</th>
+			      <th scope="col">Descricao</th>
+			      <th scope="col">Ano</th>
+			      <th scope="col">Professor</th>
+			      <th scope="col">Açao</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	<?php  while($row = $turmas->fetch_assoc()) :?>
+				    <tr>
+					  <th scope="row"> <?php echo $row['id']; ?></th>
+				      <td><?php echo $row['descricao']; ?></td>
+				      <td><?php echo $row['ano']; ?></td>
+				      <td><?php echo $row['professor']; ?></td>
+				 	   <td><a type="button" href="gerenciarturmaluno.php?idturma=<?php echo $row['id']; ?>" class="btn btn-primary">Atividades</a></td>
+				 	  
+				     
+				    </tr>
+
+			    <?php endwhile; ?>
+			  </tbody>
+			</table>
+	<?php endif; ?>
+	
+	
 		</div>
 		</div>
 </div>			

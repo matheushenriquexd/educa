@@ -24,7 +24,6 @@
 			
 			while ($row = $res->fetch_assoc()) {
 				   if ($row['correta'] == 1){
-				   		echo($row['texto_alternativa']);
 				   		$corretas++;
 				   }
 
@@ -38,6 +37,21 @@
 	$sql = "insert into rendimento(cpf_aluno,id_exercicio,acertos) values ('".$_SESSION['cpf']."',".$_GET['idexercicio'].",$corretas)";
 	$res = $mysqli->query($sql);
 }
+
+
+
+	function verificar_aluno_exec_feito(){
+		$mysqli = new mysqli("localhost", "root","","dbeduca");
+		$sql = "select * from rendimento where cpf_aluno='".$_SESSION['cpf']."' and id_exercicio=".$_GET['idexercicio'];
+		$res = $mysqli->query($sql);
+		echo($sql);
+		if($res->num_rows != 0){
+			return true;
+			
+		}else{
+			return false;
+		}
+	}
 
 
 	function aluno_turma($idturma = null){
@@ -57,9 +71,9 @@
 	}
 
 
-	function verificar_login($cpf = null, $senha = null){
+	function verificar_login($cpf = null, $senha = null, $classe = null){
 		$mysqli = new mysqli("localhost", "root","","dbeduca");
-		$sql = "SELECT * from  professores where cpf = '$cpf' and senha = '".$senha."'";
+		$sql = "SELECT * from  $classe where cpf = '$cpf' and senha = '".$senha."'";
 		$res = $mysqli->query($sql);
         $count = $res->num_rows;
 		if($count != 0){
@@ -74,9 +88,26 @@
 	}
 
 
-	function lista_turma($cpf = null){
+	function lista_atividades_turma($idturma = null){
 		$mysqli = new mysqli("localhost", "root","","dbeduca");
-		$sql = "select * from professores,turma where professores.cpf = '".$cpf."' and professores.cpf = turma.professor ";
+		$sql = "SELECT * from  exercicio where id_turma=$idturma";
+		$res = $mysqli->query($sql);
+		global $lista_exerc;
+		if($res->num_rows != 0){
+			$lista_exerc = $res;
+			
+		}
+	}
+
+
+	function lista_turma($cpf = null, $classe = null){
+		$mysqli = new mysqli("localhost", "root","","dbeduca");
+		if($classe == "professores"){
+			$sql = "select * from professores,turma where professores.cpf = '".$cpf."' and professores.cpf = turma.professor ";
+		}else{
+			$sql = "SELECT * FROM turmaxaluno,turma where turmaxaluno.aluno ='$cpf' and turmaxaluno.id = turma.id ";
+		}
+		
 		$res = $mysqli->query($sql);
 		if($res->num_rows != 0){
 			
@@ -112,14 +143,15 @@
 	}
 
 
-	function validar_login($cpf = null, $senha = null){
+	function validar_login($cpf = null, $senha = null, $classe = null){
 
 		try{
 			
-			if(verificar_login($cpf,md5($senha))){
+			if(verificar_login($cpf,md5($senha), $classe)){
 				session_start();
 				$_SESSION['cpf'] = $cpf;
 				$_SESSION['senha'] = md5($senha);
+				$_SESSION['classe'] = $classe;
 
 
 			}
@@ -163,7 +195,7 @@
 
 	function lista_exercicio($idexercicio = null){
 		$mysqli = new mysqli("localhost", "root","","dbeduca");
-		$sql = "select * from pergunta,alternativa where alternativa.id_pergunta=pergunta.id ";
+		$sql = "select * from pergunta,alternativa where alternativa.id_pergunta=pergunta.id and pergunta.id_exercicio = '$idexercicio'";
 		$res = $mysqli->query($sql);
 		global $exercicios;
 		if($res->num_rows != 0){	

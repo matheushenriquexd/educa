@@ -2,10 +2,13 @@
 	require_once 'config/config.php'; 
 	require_once 'controller/functions.php'; 
   session_start();
+   verificar_exec_feito();
 
   exercicio();
 
   verificar_resposta();
+
+
 	
 ?>
 <?php include(HEADER); ?>

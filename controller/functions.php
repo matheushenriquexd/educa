@@ -27,7 +27,7 @@
 
 	function verificar_cadastro(){
 		if (!empty($_POST['cpf']) && !empty($_POST['senha'])) {
-			validar_login($_POST['cpf'], $_POST['senha']);
+			validar_login($_POST['cpf'], $_POST['senha'], $_POST['classe']);
 		}
 	}
 
@@ -40,7 +40,7 @@
 	function verificar_usuario_logado(){
 		session_start();
 		if((isset($_SESSION['cpf'])) && (isset($_SESSION['senha']))){
-			if(verificar_login($_SESSION['cpf'],$_SESSION['senha'])){
+			if(verificar_login($_SESSION['cpf'],$_SESSION['senha'], $_SESSION['classe'])){
 				echo("Verificado e confirmado");
 				 header('location:principal.php');
 			}else{
@@ -53,7 +53,7 @@
 
 	function listaraturma(){
 		global $turmas;
-		$turmas = lista_turma($_SESSION['cpf']);
+		$turmas = lista_turma($_SESSION['cpf'],$_SESSION['classe']);
 		
 	}
 
@@ -103,6 +103,20 @@
 			adicionar_aluno_na_turma($_GET['idturma'],$_GET['cpf']);
 		}
 	}
+
+	function verificar_exec_feito(){
+		if(verificar_aluno_exec_feito()){
+			header('location:principal.php');
+		}
+	}
+	
+
+	function lista_atividades_por_turma(){
+		if (!empty($_GET['idturma'])) {
+			lista_atividades_turma($_GET['idturma']);
+		}
+	}
+
 
 
 ?>
