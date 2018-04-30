@@ -1,4 +1,12 @@
+<?php
+	require_once 'config/config.php'; 
+	require_once 'controller/functions.php'; 
 
+	if(!isset($_SESSION)){
+    session_start();
+	}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,20 +25,30 @@
 
 		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		    <ul class="navbar-nav mr-auto">
+		    	<?php if(empty($_SESSION['cpf'])) :?>
 		      <li class="nav-item active">
+
 		        <a class="nav-link" href="#">Ínicio <span class="sr-only">(current)</span></a>
+		        <?php endif; ?>
 		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="#">Sobre</a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="#">Fale Conosco</a>
-		      </li>
+		    	<?php if(!empty($_SESSION['cpf'])) :?>
+				<ul class="navbar-nav mr-auto">
+			       <li class="nav-item active">
+			        <a class="nav-link" href="principal.php">Principal</a>
+			      </li>
+			    </ul>
+
+			    <ul class="nav navbar-nav ml-auto">
+			       <li class="nav-item active">
+			        <a class="nav-link" href="relatorios.php">Relatorio</a>
+			      </li>
+			    </ul>	    
 		       <ul class="nav navbar-nav ml-auto">
-			       <li class="nav-item">
+			       <li class="nav-item active">
 			        <a class="nav-link" href="principal.php?sair=true">Sair</a>
 			      </li>
 			    </ul>
+			    <?php endif; ?>
 		    </ul>
 		  </div>
 	</nav>

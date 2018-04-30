@@ -50,7 +50,7 @@
 			<div class="col-md-12">	
 				<div class="alert alert-warning" role="alert">
 					  Você nao possui turma <b>cadastrada</b> realize o cadastro de alguma turma para continuar.
-					  echo("<a type='button' href='criarnovaturma.php' class='btn btn-success'>Criar Nova Turma</a>");
+					  
 			    </div>
 		    </div>	
 			<?php endif; ?>

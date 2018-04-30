@@ -13,7 +13,8 @@
 		<div class="col-md-12">
 			<div class="jumbotron jumbotron">
 				<div class="container">
-					<p class="lead">Seja-bem vindo ao sistema <b><?php echo($_SESSION['nome']) ?></b></p>
+					<p class="lead">Seja-bem vindo ao sistema professor(a)<b><?php echo($_SESSION['nome']) ?></b></p>
+					<p class="lead">Nessa tela você faz a manutençao de toda a sua turma, adiciona ou remove alunos assim como as atividades.</p>
 				</div>
 			</div>
 		</div>
@@ -31,7 +32,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				
-		
+			<?php if ($lista_exerc) :?>
 
 			<table class="table table-bordered">
 			  <thead>
@@ -54,6 +55,8 @@
 			    <?php endwhile; ?>
 			  </tbody>
 			</table>
+
+			<?php endif; ?>
 		</div>
 		</div>
 
@@ -70,7 +73,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				
-		
+		<?php if ($resposta) :?>
 
 			<table class="table table-bordered">
 			  <thead>
@@ -92,6 +95,8 @@
 			    <?php endwhile; ?>
 			  </tbody>
 			</table>
+
+				<?php endif; ?>
 		</div>
 		</div>
 </div>			

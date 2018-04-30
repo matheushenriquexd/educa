@@ -17,15 +17,16 @@
 				<div class="col-sm-5 offset-sm-3">
 					<div class="jumbotron jumbotron">
 						<div class="container">
-									<p class="lead">Olá <b><?php echo($_SESSION['nome']) ?></b>, nessa tela você encontra todas as ativades que o professor da sua turma registrou. Não esqueça de realizar as atividades. ;)</p>
+									<p class="lead">Olá professor(a) <b><?php echo($_SESSION['nome']) ?></b>, nessa tela você cadastrar sua(s) turma(s). Preencha corretamente os dados, para nao haver incosistencia no sistema.</p>
 								</div>
 					</div>
 
 						<form action="criarnovaturma.php" method="post">
 
 						 <div class="form-group">
-					    <label for="exampleInputEmail1">Descricao</label>
-					    <input class="form-control" id="exampleInputEmail1" name="descricao" placeholder="Digite a descricao..">
+						<label for="exampleInputEmail1">Descricao</label>
+						<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descricao" placeholder="Digite a descricao.."></textarea>
+					   
 					    <label for="exampleInputEmail1">Ano</label>
 					    <input class="form-control" id="exampleInputEmail1" name="ano" placeholder="Digite o ano da turma..">
 						<div class="form-group">
