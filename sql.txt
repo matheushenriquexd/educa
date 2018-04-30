@@ -1,0 +1,10 @@
+create table alunos(cpf varchar(11) primary key, nome varchar(255), senha varchar(32));
+create table professores(cpf varchar(11) primary key, nome varchar(255), senha varchar(32));
+create table turma(ano int, descricao text, id int primary key AUTO_INCREMENT, professor varchar(11), FOREIGN KEY (professor) REFERENCES professores(cpf));
+create table exercicio(id int AUTO_INCREMENT, titulo text, id_turma int, PRIMARY KEY(id), FOREIGN KEY (id_turma) REFERENCES turma(id));
+create table pergunta(id int AUTO_INCREMENT PRIMARY key, enunciado text,id_exercicio int, FOREIGN KEY(id_exercicio) REFERENCES exercicio(id));
+create table alternativa(id int AUTO_INCREMENT PRIMARY key, texto_alternativa text, correta boolean, id_pergunta int,FOREIGN key(id_pergunta) REFERENCES pergunta(id));
+create table rendimento(cpf_aluno varchar(11), acertos int, id_exercicio int, FOREIGN KEY (cpf_aluno) REFERENCES alunos(cpf),FOREIGN KEY (id_exercicio) REFERENCES exercicio(id), PRIMARY KEY(cpf_aluno,id_exercicio));
+create table turmaxaluno(aluno varchar(11), id int, FOREIGN KEY (aluno) REFERENCES alunos(cpf));
+
+ 

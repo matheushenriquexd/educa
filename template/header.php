@@ -3,7 +3,7 @@
 	require_once 'controller/functions.php'; 
 
 	if(!isset($_SESSION)){
-    session_start();
+    	session_start();
 	}
 
 ?>
