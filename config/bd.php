@@ -36,6 +36,7 @@
 
 	$sql = "insert into rendimento(cpf_aluno,id_exercicio,acertos) values ('".$_SESSION['cpf']."',".$_GET['idexercicio'].",$corretas)";
 	$res = $mysqli->query($sql);
+	header('location: relatorios.php');
 }
 
 
@@ -44,12 +45,45 @@
 		$mysqli = new mysqli("localhost", "root","","dbeduca");
 		$sql = "select * from rendimento where cpf_aluno='".$_SESSION['cpf']."' and id_exercicio=".$_GET['idexercicio'];
 		$res = $mysqli->query($sql);
-		echo($sql);
 		if($res->num_rows != 0){
 			return true;
 			
 		}else{
 			return false;
+		}
+	}
+
+
+
+	function adicionar_pergunta_db($idatividade = null, $enunciado = null, $alter , $select){
+		$mysqli = new mysqli("localhost", "root","","dbeduca");
+		$sql = "insert into pergunta(enunciado,id_exercicio) values ('$enunciado', $idatividade)";
+		$res = $mysqli->query($sql);
+		if($res){
+			$id_pergunta;
+			$correta = 0;
+			$sql = "select * from pergunta where enunciado='$enunciado' and id_exercicio=$idatividade";
+		    $res = $mysqli->query($sql);
+		    while ($row = $res->fetch_assoc()) {
+		    	$id_pergunta = $row['id'];
+		    }
+
+
+		    for($i = 0; $i < 4; $i++){
+		    	if($i == $select){
+		    		$correta = 1;
+		    	}else{
+		    		$correta = 0;
+		    	}
+
+		    	$sql = "insert into alternativa(texto_alternativa,correta,id_pergunta) values ('$alter[$i]',$correta,$id_pergunta)";
+		    	$res = $mysqli->query($sql);
+		    	echo("Adicionado com sucesso !!!");
+		    }
+		   
+
+		}else{
+			echo($sql);
 		}
 	}
 
@@ -132,6 +166,20 @@
 	}
 
 
+	function listar_rendimento(){
+		$mysqli = new mysqli("localhost", "root","","dbeduca");
+		$sql = "select * from rendimento,exercicio where rendimento.cpf_aluno ='".$_SESSION['cpf']."' and rendimento.id_exercicio = exercicio.id ";
+		$res = $mysqli->query($sql);
+		global $rendimento;
+		if($res){	
+			$rendimento = $res;
+			
+		}else{
+			$rendimento = null;
+		}
+	}
+
+
 
 	function exluirturmabd($id = null){
 		$mysqli = new mysqli("localhost", "root","","dbeduca");
@@ -204,6 +252,22 @@
 			
 		}else{
 			return null;
+		}
+	}
+
+
+	function criar_atividade_db($idturma = null, $nome_atividade = null){
+		$mysqli = new mysqli("localhost", "root","","dbeduca");
+		$sql = "insert into exercicio(id_turma, titulo) values ($idturma,'$nome_atividade')";
+		echo($sql);
+		$res = $mysqli->query($sql);
+		if($res){
+			header('location: gerenciarturma.php?idturma='.$idturma);
+		   
+		
+			
+		}else{
+			echo($sql);
 		}
 	}
 

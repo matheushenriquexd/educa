@@ -106,7 +106,7 @@
 
 	function verificar_exec_feito(){
 		if(verificar_aluno_exec_feito()){
-			header('location:principal.php');
+			header('location:relatorios.php');
 		}
 	}
 	
@@ -116,6 +116,33 @@
 			lista_atividades_turma($_GET['idturma']);
 		}
 	}
+
+
+	function rendimento_aluno(){
+		listar_rendimento();
+	}
+
+
+	function criar_atividade(){
+		if (!empty($_GET['idturma']) && !empty($_GET['nome_atividade']))  {
+			criar_atividade_db($_GET['idturma'],$_GET['nome_atividade']);
+		}
+		
+	}
+
+
+	function adicionar_pergunta(){
+		if (!empty($_GET['idatividade'] && !empty($_GET['enunciado'])))  {
+			$alter = [4];
+			$alter[0] = $_GET['a1'];
+			$alter[1] = $_GET['a2'];
+			$alter[2] = $_GET['a3'];
+			$alter[3] = $_GET['a4'];
+			adicionar_pergunta_db($_GET['idatividade'],$_GET['enunciado'],$alter,$_GET['select']);
+		}
+	}
+
+
 
 
 

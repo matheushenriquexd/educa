@@ -15,6 +15,12 @@
 <div class="container">
 		<div class="row">
 				<div class="col-sm-5 offset-sm-3">
+					<div class="jumbotron jumbotron">
+						<div class="container">
+									<p class="lead">Olá <b><?php echo($_SESSION['nome']) ?></b>, nessa tela você encontra todas as ativades que o professor da sua turma registrou. Não esqueça de realizar as atividades. ;)</p>
+								</div>
+					</div>
+
 						<form action="criarnovaturma.php" method="post">
 
 						 <div class="form-group">

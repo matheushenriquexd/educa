@@ -24,7 +24,8 @@
 		<div class="col-md-12">
 			<div class="jumbotron jumbotron">
 				<div class="container">
-					<p class="lead">Seja-bem vindo ao sistema <?php echo($_SESSION['nome']) ?></p>
+					<p class="lead">Seja-bem vindo ao sistema <b>Educa+ <?php echo($_SESSION['nome']) ?>,</b></p>
+					<p class="lead">Nessa tela você acompanha a(s) turma(s) nas quais você foi <b>cadastrado</b> se for um <b>aluno</b>  ou as turma(s) que você <b>cadastrou</b> se for um <b>professor</b>.</p>
 				</div>
 			</div>
 		</div>
@@ -32,11 +33,30 @@
 	
 	<div class="row">
 		<div class="col-md-1">
+			<?php if ($turmas) :?>
+
 			<h1>Turmas</h1>
+
+			<?php endif; ?>
 		</div>
+		<?php if (!$turmas && $_SESSION['classe'] == 'alunos') :?>
+			<div class="col-md-12">	
+				<div class="alert alert-warning" role="alert">
+					  Você nao foi <b>cadastrado</b> em nenhuma turma ainda. Aguarde até que um <b>professor faca o seu cadastro.</b>
+			    </div>
+		    </div>	
+			<?php endif; ?>
+		<?php if (!$turmas && $_SESSION['classe'] == 'professores') :?>
+			<div class="col-md-12">	
+				<div class="alert alert-warning" role="alert">
+					  Você nao possui turma <b>cadastrada</b> realize o cadastro de alguma turma para continuar.
+					  echo("<a type='button' href='criarnovaturma.php' class='btn btn-success'>Criar Nova Turma</a>");
+			    </div>
+		    </div>	
+			<?php endif; ?>
 		<div class="col-md-1 offset-md-9">
 			<?php 
-				if($_SESSION['nome'] == 'professores'){
+				if($_SESSION['classe'] == 'professores'){
 					echo("<a type='button' href='criarnovaturma.php' class='btn btn-success'>Criar Nova Turma</a>");
 				}
 

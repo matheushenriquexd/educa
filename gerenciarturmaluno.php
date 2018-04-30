@@ -11,12 +11,22 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<div class="jumbotron jumbotron">
+
+
+	<div class="jumbotron jumbotron">
 				<div class="container">
 					<p class="lead">Olá <b><?php echo($_SESSION['nome']) ?></b>, nessa tela você encontra todas as ativades que o professor da sua turma registrou. Não esqueça de realizar as atividades. ;)</p>
 				</div>
-			</div>
-	<?php  while($row = $lista_exerc->fetch_assoc()) :?>
+	</div>
+
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="principal.php">Principal</a></li>
+	     <li class="breadcrumb-item active" aria-current="page">Atividades</li>
+	  </ol>
+	</nav>
+		
+	
 				    <table class="table table-bordered">
 					  <thead>
 					    <tr>
@@ -26,6 +36,7 @@
 					    </tr>
 					  </thead>
 			  <tbody>
+			  	<?php  while($row = $lista_exerc->fetch_assoc()) :?>
 				    <tr>
 				      <th scope="row"> <?php echo $row['id']; ?></th>
 					  <th scope="row"> <?php echo $row['titulo']; ?></th>
@@ -33,9 +44,11 @@
 				 	  
 				     
 				    </tr>
-				    </table>
+				 
 
 			    <?php endwhile; ?>
+
+			       </table>
 
 			</div>
 			</div>
